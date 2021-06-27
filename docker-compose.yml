@@ -4,3 +4,6 @@ services:
     container_name: decbot
     build: .
     restart: unless-stopped
+    args:
+      client:
+      token:
