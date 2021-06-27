@@ -1,7 +1,11 @@
-FROM i386/alpine:latest
+FROM i386/alpine:3.13
 
-ENV CLIENT=
-ENV TOKEN=
+ARG CLIENT
+ARG TOKEN
+
+RUN printf 'https://dl-cdn.alpinelinux.org/alpine/v3.13/main\n\
+https://dl-cdn.alpinelinux.org/alpine/v3.13/community\n'\
+> /etc/apk/repositories
 
 RUN apk update && apk add --no-cache \
     python3 \
@@ -14,24 +18,22 @@ RUN apk update && apk add --no-cache \
     git \
     ffmpeg \
     xvfb \
+    wine=4.0.3-r0 \
 ;
 
-RUN printf 'https://dl-cdn.alpinelinux.org/alpine/v3.7/main\n\
-https://dl-cdn.alpinelinux.org/alpine/v3.7/community\n'\
-> /etc/apk/repositories
+RUN Xvfb :0 -screen 0 1024x768x16 &
+RUN export DISPLAY=:0.0 && wineboot
 
-RUN apk add --no-cache \
-    wine; exit 0;
+#RUN pip install decbot
+RUN pip install discord.py pydub pyyaml pynacl --prefer-binary
 
-RUN wineboot;
+RUN cd /tmp && git clone https://github.com/wquist/DECbot.git && cd /tmp/DECbot && pip install .
 
-RUN pip install decbot
+RUN mkdir -p /usr/local/bin/dectalk && cd /usr/local/bin/dectalk && git clone https://github.com/uebergucken/DECTalk4_win32_bin.git
 
-RUN mkdir -p /etc/decbot && cd /etc/decbot && git clone https://github.com/uebergucken/DECTalk4_win32_bin.git
-
-RUN printf 'client: %s \n\
+RUN mkdir -p /etc/decbot && printf 'client: %s \n\
 token: %s \n\
-tts: { bin: /etc/decbot/DECTalk4_win32_bin } \n\
+tts: { bin: /usr/local/bin/dectalk/DECTalk4_win32_bin } \n\
 opus: /usr/lib/libopus.so.0 \n' "${CLIENT}" "${TOKEN}" \
 > /etc/decbot/decbot.conf
 
