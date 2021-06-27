@@ -2,8 +2,9 @@ version: '3'
 services:
   decbot:
     container_name: decbot
-    build: .
     restart: unless-stopped
-    args:
-      client:
-      token:
+    build:
+      context: .
+      args:
+        - CLIENT=
+        - TOKEN=
