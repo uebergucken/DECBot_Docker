@@ -16,8 +16,8 @@ RUN apk update && apk add --no-cache \
     xvfb \
 ;
 
-RUN printf 'https://dl-cdn.alpinelinux.org/alpine/v3.10/main\n\
-https://dl-cdn.alpinelinux.org/alpine/v3.10/community\n'\
+RUN printf 'https://dl-cdn.alpinelinux.org/alpine/v3.12/main\n\
+https://dl-cdn.alpinelinux.org/alpine/v3.12/community\n'\
 > /etc/apk/repositories
 
 RUN apk add --no-cache wine
