@@ -1,11 +1,7 @@
-FROM i386/alpine:3.13
+FROM i386/alpine:3.14
 
 ARG CLIENT
 ARG TOKEN
-
-RUN printf 'https://dl-cdn.alpinelinux.org/alpine/v3.13/main\n\
-https://dl-cdn.alpinelinux.org/alpine/v3.13/community\n'\
-> /etc/apk/repositories
 
 RUN apk update && apk add --no-cache \
     python3 \
@@ -18,13 +14,17 @@ RUN apk update && apk add --no-cache \
     git \
     ffmpeg \
     xvfb \
-    wine=4.0.3-r0 \
 ;
+
+RUN printf 'https://dl-cdn.alpinelinux.org/alpine/v3.10/main\n\
+https://dl-cdn.alpinelinux.org/alpine/v3.10/community\n'\
+> /etc/apk/repositories
+
+RUN apk add --no-cache wine
 
 RUN Xvfb :0 -screen 0 1024x768x16 &
 RUN export DISPLAY=:0.0 && wineboot
 
-#RUN pip install decbot
 RUN pip install discord.py pydub pyyaml pynacl --prefer-binary
 
 RUN cd /tmp && git clone https://github.com/wquist/DECbot.git && cd /tmp/DECbot && pip install .
