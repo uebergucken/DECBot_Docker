@@ -27,7 +27,7 @@ RUN export DISPLAY=:0.0 && wineboot
 
 RUN pip install discord.py pydub pyyaml pynacl --prefer-binary
 
-RUN cd /tmp && git clone https://github.com/wquist/DECbot.git && cd /tmp/DECbot && pip install .
+RUN cd /tmp && git clone https://github.com/uebergucken/DECbot.git && cd /tmp/DECbot && pip install .
 
 RUN mkdir -p /usr/local/bin/dectalk && cd /usr/local/bin/dectalk && git clone https://github.com/uebergucken/DECTalk4_win32_bin.git
 
