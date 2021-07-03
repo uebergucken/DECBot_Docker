@@ -5,7 +5,7 @@ It's based around [wquist/DECbot](https://github.com/wquist/DECbot) - _A Discord
 
 DECbot uses a win32 say.exe binary based on a DECTalk 4.1 build, which arguably has 'better' voicing than later versions.
 
-It's a hefty container at ~640MB as it requires wine, gcc and various build-tools for some dependencies. I will work on cleaning it up in future.
+It's a hefty container at ~420MB as it requires xvfb, wine, opus, ffmpeg, python dependencies etc.
 
 
 NOTE: We are trying to get the original DECTalk code to build on modern linux distros, which will allow us to do-away with wine and open up many possibilities with voice manipulation. If you are experienced in getting C code that spans from 1985-2001 to successfully build, please join us at https://github.com/dectalk
