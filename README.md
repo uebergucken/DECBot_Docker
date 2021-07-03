@@ -22,7 +22,8 @@ NOTE: We are trying to get the original DECTalk code to build on modern linux di
 9. Test using the bot commands outlined in the original [README.md](https://github.com/wquist/DECbot/blob/master/README.md) (ie. !dec talk this is a test)
 
 # Limitations
-Per the original code, the bot will respond to commands on the first server it is invited to. If you attempt to invite it in to another server it will not respond on any subsenquent servers. 
-For now if you want DECbot on multiple servers then seperate docker containers, seperate applications/bots are required. Make sure to give the container name in docker-compose.yml a unique name for each.
+Per the original code, the bot will respond to commands on the first server it is invited to. If you attempt to invite it in to another server it will not respond on any subsequent servers. 
+
+For now if you want DECbot on multiple servers, then seperate docker containers and seperate applications/bots are required. Make sure to give the container name in docker-compose.yml a unique name for each.
 
 I have forked wquist/DECbot with the hope to get a single bot working across multiple servers. If I manage to get that working then this readme will be updated accordingly.
